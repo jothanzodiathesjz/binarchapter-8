@@ -1,0 +1,17 @@
+#header{
+  height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  align-items: center;
+}
+
+a{
+  text-decoration: none;
+}
+
+.formAdd{
+  width: 500px;
+  height: 100%;
+}
