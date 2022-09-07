@@ -1,5 +1,6 @@
-#Binar Chapter 8
+# Binar Chapter 8
 
-##admin
--username: jozo
--pw: 123123
+## admin
+
+- username: jozo
+- pw: 123123
