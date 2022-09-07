@@ -1,0 +1,361 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Challenge Binar Chapter 8",
+    "description": "Api challenge binar chapter 8",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8000",
+      "description": "host api"
+    }
+  ],
+
+  "tags":[
+    {
+      "name": "authentications",
+      "descriptions": "api for authentications"
+    },
+    {
+      "name": "dashboard",
+      "descriptions": "api for dashboard"
+    },
+    {
+      "name": "score",
+      "descriptions": "api for score"
+    }
+  ],
+
+  "paths":{
+    "/register":{
+      "post": {
+        "tags": ["authentications"],
+        "requestBody": {
+          "description": "register user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/register"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "succesfull",
+            "content":{
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "successfull register",
+                    "statusCode": 200,
+                    "data": {}
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login":{
+      "post": {
+        "tags": ["authentications"],
+        "summary": "get all data",
+        "requestBody": {
+          "description": "Login User",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/login"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "succesfull",
+            "content":{
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "successfull Login",
+                    "statusCode": 200,
+                    "result": {
+                      "userid": "",
+                      "username": "",
+                      "role": "",
+                      "token": ""
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/super-user/api":{
+      "get": {
+        "tags": ["dashboard"],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "succesfull",
+            "content":{
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "successfull get data",
+                    "statusCode": 200,
+                    "result": {  }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/super-user/api/{iduser}":{
+      "get": {
+        "tags": ["dashboard"],
+        "summary": "Get detail user id",
+        "operationId": "get data",
+        "parameters": [
+          {
+            "name": "iduser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "succesfull",
+            "content":{
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "successfull get data",
+                    "statusCode": 200,
+                    "result": {  }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/super-user/updateuser":{
+      "post": {
+        "tags": ["dashboard"],
+        "summary": "update user",
+        "requestBody": {
+          "description": "update user",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/updateuser"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "succesfull",
+            "content":{
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "successfull update data",
+                    "statusCode": 200,
+                    "result": {  }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/super-user/delete/{iduser}":{
+      "delete": {
+        "tags": ["dashboard"],
+        "summary": "delete user",
+        "operationId": "delete data",
+        "parameters": [
+          {
+            "name": "iduser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "succesfull",
+            "content":{
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "successfull delete data",
+                    "statusCode": 200,
+                    "result": {  }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/games/score/{iduser}":{
+      "get": {
+        "tags": ["score"],
+        "summary": "Get score",
+        "operationId": "get score",
+        "parameters": [
+          {
+            "name": "iduser",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "succesfull",
+            "content":{
+              "aplication/json": {
+                "schema": {
+                  "type": "object",
+                  "example": {
+                    "message": "successfull get data",
+                    "statusCode": 200,
+                    "result": {  }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+
+  "components": {
+    "schemas": {
+      "register": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "testuser"
+          },
+          "password": {
+            "type": "string",
+            "example": "testpass123123"
+          },
+          "email": {
+            "type": "string",
+            "example": "test@pemail.com"
+          },
+          "role": {
+            "type": "string",
+            "example": "user"
+          }
+        }
+      },
+      "login": {
+        "type": "object",
+        "properties": {
+          "username": {
+            "type": "string",
+            "example": "jozo"
+          },
+          "password": {
+            "type": "string",
+            "example": 123123
+          }
+        }
+      },
+      "updateuser": {
+        "type": "object",
+        "properties": {
+          "user_id": {
+            "type": "string",
+            "example": "6316e45a0fa62f5da8789350"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "jojo"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "ganteng"
+          },
+          "umur": {
+            "type": "string",
+            "example": 23
+          },
+          "tgl_lahir": {
+            "type": "string",
+            "example": "20 mei 1999"
+          },
+          "gender": {
+            "type": "string",
+            "example": "laki laki"
+          },
+          "address": {
+            "type": "string",
+            "example": "Jl. Nuha"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

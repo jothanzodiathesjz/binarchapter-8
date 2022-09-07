@@ -1,0 +1,98 @@
+<%- include('./partials/header.ejs') %>
+<!-- Content wrapper -->
+<div class="content-wrapper">
+    <!-- Content -->
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <div id="konten" class="row">
+        <div class="card">
+            <h5 class="card-header">Table Basic</h5>
+            <div class="table-responsive text-nowrap">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody class="table-border-bottom-0">
+                  <% let nomor = 1; %>
+                  <% result.forEach(i => { %>
+                  <tr>
+                    <td><%= nomor++ %></td>
+                    <td><%= i.username %></td>
+                    <td><%= i.email %></td>
+                    <td>
+                      <div class="dropdown">
+                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                          <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item" href="/datauser/<%= i._id %>"
+                            ><i class="bx bx-edit-alt me-1"></i> Details</a
+                          >
+                          <a class="dropdown-item" onclick="userDel('<%= i._id %>')"
+                            ><i class="bx bx-trash me-1"></i> Delete</a
+                          >
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+      </div>
+    </div>
+    <!-- / Content -->
+
+    <!-- Footer -->
+    
+
+    <div class="content-backdrop fade"></div>
+  </div>
+  <!-- Content wrapper -->
+</div>
+<!-- / Layout page -->
+</div>
+
+<!-- Overlay -->
+<div class="layout-overlay layout-menu-toggle"></div>
+</div>
+<script>
+function getCookie(name) {
+      var nameEQ = name + "=";
+      var ca = document.cookie.split(';');
+      for(var i=0;i < ca.length;i++) {
+          var c = ca[i];
+          while (c.charAt(0)==' ') c = c.substring(1,c.length);
+          if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+      }
+      return null;
+  }
+  let dataUser = JSON.parse(getCookie('user'))
+  let token = dataUser.token
+  const config = {
+                method: 'DELETE',
+                headers: {
+                  "Authorization": 'Bearer ' + token
+                }
+  }
+
+  function userDel(id){
+    fetch('http://localhost:8000/super-user/delete/' + id, config).then(function (response){
+            return  response.json()
+        }).then(function (result){
+          alert(result.message)
+          if(result.statusCode === 200){
+            window.location.reload()
+          }
+            console.log(result)
+        }).catch(function (error){
+            console.log(error)
+        })
+      }
+</script>
+<%- include('./partials/footer.ejs') %>
